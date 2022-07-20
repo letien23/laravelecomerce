@@ -49,7 +49,7 @@
                                         number_format($product['item']['promotion_price']) }}</span></span>
                                     </div>
                                 </div>
-                                {{-- aasdffds --}}
+    
                             </div>
                             @endforeach
 
