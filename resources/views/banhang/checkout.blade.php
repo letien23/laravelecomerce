@@ -17,15 +17,18 @@
 <div class="container">
     <div id="content">
         
-        <form action="#" method="post" class="beta-form-checkout">
+        <form action="{{ route('checkOut') }}" method="post" class="beta-form-checkout">
+            @csrf
             <div class="row">
                 <div class="col-sm-6">
-                    <h4>Đặt hàng</h4>
-                    <div class="space20">&nbsp;</div>
+             
+                    @if(Session::has('success'))
+                    <div class="alert alert-success">{{ Session::get('success')}}</div>
+                    @endif
 
                     <div class="form-block">
                         <label for="name">Họ tên*</label>
-                        <input type="text" id="name" placeholder="Họ tên" required>
+                        <input type="text" id="name" name="name" placeholder="Họ tên" required>
                     </div>
                     <div class="form-block">
                         <label>Giới tính </label>
@@ -36,51 +39,59 @@
 
                     <div class="form-block">
                         <label for="email">Email*</label>
-                        <input type="email" id="email" required placeholder="expample@gmail.com">
+                        <input type="email" name="email" id="email"required placeholder="expample@gmail.com">
                     </div>
 
                     <div class="form-block">
                         <label for="adress">Địa chỉ*</label>
-                        <input type="text" id="adress" placeholder="Street Address" required>
+                        <input type="text" id="address" name="address" placeholder="Street Address" required>
                     </div>
                     
 
                     <div class="form-block">
                         <label for="phone">Điện thoại*</label>
-                        <input type="text" id="phone" required>
+                        <input type="text" id="phone" name="phone_number" required>
                     </div>
                     
                     <div class="form-block">
                         <label for="notes">Ghi chú</label>
-                        <textarea id="notes"></textarea>
+                        <textarea id="note" name="note"></textarea>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="your-order">
                         <div class="your-order-head"><h5>Đơn hàng của bạn</h5></div>
+
                         <div class="your-order-body" style="padding: 0px 10px">
+                            @if(Session::has('cart'))
                             <div class="your-order-item">
                                 <div>
                                 <!--  one item	 -->
+                                @foreach($productCarts as $pro)
                                     <div class="media">
-                                        <img width="25%" src="assets/dest/images/shoping1.jpg" alt="" class="pull-left">
+                                        <img width="25%" src="/source/image/product/{{$pro['item']['image']}}" alt="" class="pull-left">
                                         <div class="media-body">
-                                            <p class="font-large">Men's Belt</p>
-                                            <span class="color-gray your-order-info">Color: Red</span>
-                                            <span class="color-gray your-order-info">Size: M</span>
-                                            <span class="color-gray your-order-info">Qty: 1</span>
+                                            <p class="font-large">{{$pro['item']['name']}}</p>
+                                            <span class="color-gray your-order-info">{{$pro['item']['name']}}</span>
+                                            <span class="cart-item-amount">{{ $pro['qty']}}*
+                                                <span>${{ $pro['item']['promotion_price'] == 0 ? number_format($pro['item']['unit_price']): number_format($pro['item']['promotion_price']) }}
+                                                </span>
+                                            </span>
                                         </div>
                                     </div>
+                                @endforeach
                                 <!-- end one item -->
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
+                            @endif
                             <div class="your-order-item">
                                 <div class="pull-left"><p class="your-order-f18">Tổng tiền:</p></div>
-                                <div class="pull-right"><h5 class="color-black">$235.00</h5></div>
+                                <div class="pull-right"><h5 class="color-black">$ {{ Session::has('cart')? number_format($cart->totalPrice): '0'}}</h5></div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
+                        
                         <div class="your-order-head"><h5>Hình thức thanh toán</h5></div>
                         
                         <div class="your-order-body">
@@ -107,7 +118,7 @@
                             </ul>
                         </div>
 
-                        <div class="text-center"><a class="beta-btn primary" href="#">Đặt hàng <i class="fa fa-chevron-right"></i></a></div>
+                        <div class="text-center"><button type="submit">Đặt hàng</button></div>
                     </div> <!-- .your-order -->
                 </div>
             </div>

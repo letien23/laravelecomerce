@@ -9,9 +9,14 @@
             </div>
             <div class="pull-right auto-width-right">
                 <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                    @if(Auth::check())
+                        <li><a href="#"><i class="fa fa-user"></i>Xin chào {{ Auth::user()->full_name }}</a></li>
+                        <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                    @else
+                        <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
+                        <li><a href="{{ route('signUp') }}">Đăng kí</a></li>
+                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -38,6 +43,7 @@
                         <div class="beta-dropdown cart-body">
                             @foreach($productCarts as $product)
                             <div class="cart-item">
+                                <a class="cart-item-delete" href="{{ route('delCart', $product['item']['id'] ) }}"><i class="fa fa-times"></i></a>
                                 <div class="media">
                                     <a class="pull-left" href="#"><img src="/source/image/product/{{ $product['item']['image'] }}" alt=""></a>
                                     {{-- Vì cái trỏ tới items có phần tử item là một đối tượng nên cân phải trỏ đến item rồi mới đến thuộc tính của item --}}
@@ -54,12 +60,12 @@
                             @endforeach
 
                             <div class="cart-caption">
-                                <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">${{number_format($cart->totalPrice)}}</span></div>
+                                <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value"> $ {{ number_format($cart->totalPrice) }}</span></div>
                                 <div class="clearfix"></div>
 
                                 <div class="center">
                                     <div class="space10">&nbsp;</div>
-                                    <a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+                                    <a href="{{route('checkOut')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
                                 </div>
                             </div>
                         </div>
