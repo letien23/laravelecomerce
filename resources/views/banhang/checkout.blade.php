@@ -103,7 +103,11 @@
                                         Cửa hàng sẽ gửi hàng đến địa chỉ của bạn, bạn xem hàng rồi thanh toán tiền cho nhân viên giao hàng
                                     </div>						
                                 </li>
-
+                                <li class="payment_method_cheque">
+                                    <input id="payment_method_cheque" type="radio" class="input-radio" 
+                                    name="payment_method" value="VNPAY" data-order_button_text="">
+                                    <label for="payment_method_cheque">Thanh toán online</label>             
+                                </li>
                                 <li class="payment_method_cheque">
                                     <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="ATM" data-order_button_text="">
                                     <label for="payment_method_cheque">Chuyển khoản </label>

@@ -64,7 +64,7 @@
 										</div>
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="{{ route('banhang.addtocart',$new->id) }}"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{ route('detail', $new->id) }}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -98,17 +98,17 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{ $pro->name }}</p>
 											<p class="single-item-price">
-												@if($new->promotion_price != 0)
-												<span class="flash-del">${{ $new->unit_price }}</span>
-												<span class="flash-sale">${{ $new->promotion_price }}</span>
+												@if($pro->promotion_price != 0)
+												<span class="flash-del">${{ $pro->unit_price }}</span>
+												<span class="flash-sale">${{ $pro->promotion_price }}</span>
                                                 @else
-                                                <span>${{$new->unit_price}}</span>
+                                                <span>${{$pro->unit_price}}</span>
                                                 @endif
 											</p>
 										</div>
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="{{ route('banhang.addtocart',$pro->id) }}"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{ route('detail', $pro->id) }}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
                                         <hr>
