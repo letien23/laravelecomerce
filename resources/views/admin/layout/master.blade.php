@@ -15,7 +15,7 @@
     <link href="/source/admin/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/source/admin/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/source/admin/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -98,10 +98,10 @@
                             <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">List Product</a>
+                                    <a href="{{ route('admin.category-list') }}">List Product</a>
                                 </li>
                                 <li>
-                                    <a href="#">Add Product</a>
+                                    <a href="{{ route('add-product') }}">Add Product</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -127,50 +127,7 @@
 
         <!-- Page Content -->
         <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Product
-                            <small>List</small>
-                        </h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr align="center">
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd gradeX" align="center">
-                                <td>1</td>
-                                <td>Áo Thun Nana</td>
-                                <td>200.000 VNĐ</td>
-                                <td>3 Minutes Age</td>
-                                <td>Hiện</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                            </tr>
-                            <tr class="even gradeC" align="center">
-                                <td>2</td>
-                                <td>Áo Thun Polo</td>
-                                <td>250.000 VNĐ</td>
-                                <td>1 Hours Age</td>
-                                <td>Ẩn</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.row -->
-            </div>
+            @yield('content')
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
@@ -188,10 +145,10 @@
     <script src="/source/admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
+    <script src="/source/admin/dist/js/sb-admin-2.js"></script>
 
     <!-- DataTables JavaScript -->
-    <script src="/source/admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/source/admin/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="/source/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->

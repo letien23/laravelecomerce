@@ -28,9 +28,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('yêu cầu cấp lại mật khẩu từ shop bánh')->replyTo('davien04@gmail.com', 'Dan Linh')->view('emails.interfaceEmail',[
-            'sentData' => $this->sentData
-        ]);
+        return $this->subject('Thông tin hóa đơn')->replyTo('tien0838420262@gmail.com', 'Lê Tiến')->view('emails.interfaceEmail',['sentData' => $this->sentData]);
         // return $this->view('view.name');
     }
 }

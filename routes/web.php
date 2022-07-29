@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\WishlistController;
+
+use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\AdminLoginMiddldeware;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +67,40 @@ Route::get('/vnpay/vnpay_return', [PageController::class, 'vnpayReturn'])->name(
 //email
 Route::get('/input-email', [PageController::class,'getInputEmail'])->name('getInputEmail');
 Route::post('/input-email',[PageController::class,'postInputEmail'])->name('postInputEmail');
+
+//amdin
+Route::get('/admin/login', [UserController::class, 'getLogin'])->name('admin.category.login');
+Route::post('/admin/login', [UserController::class, 'postLogin'])->name('admin.category.login');
+// Route::get('/admin/logout',[UserController::class,'getLogout'])->name('admin.category.logout');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'adminlogin'], function () {
+    Route::group(['prefix' => 'category'], function () {
+        // admin/category/danhsach
+        Route::get('/category-list', [CategoryController::class, 'getCategoryList'])->name('admin.category-list');
+        // Route::get('them',[CategoryController::class,'getCateAdd'])->name('admin.getCateAdd');
+        // Route::post('them',[CategoryController::class,'postCateAdd'])->name('admin.postCateAdd');
+        // Route::get('xoa/{id}',[CategoryController::class,'getCateDelete'])->name('admin.getCateDelete');
+        // Route::get('sua/{id}',[CategoryController::class,'getCateEdit'])->name('admin.getCateEdit');
+        // Route::post('sua/{id}',[CategoryController::class,'postCateEdit'])->name('admin.postCateEdit');
+    });
+});
+Route::get('/category-add', [CategoryController::class , 'getAdminpage'])->name('add-product');
+Route::post('/category-add', [CategoryController::class , 'postAdminAdd'])->name('add-product');
+Route::get('/category-list',[CategoryController::class, 'getIndexAdmin'])->name('list-product');
+
+// ---
+Route::get('/admin-edit-form/{id}',[CategoryController::class,'getAdminEdit'])->name('get-edit-product');
+Route::post('/admin-edit',[CategoryController::class,'postAdminEdit'])->name('edit-product');
+
+
+Route::post('/admin-delete/{id}',[CategoryController::class,'postAdminDelete'])->name('post-delete-product');
+//wishlist
+Route::prefix('wishlist')->group(function () {
+    Route::get('/add/{id}', [WishlistController::class, 'AddWishlist']);
+    Route::get('/delete/{id}', [WishlistController::class, 'DeleteWishlist']);
+
+    Route::get('/order', [WishlistController::class, 'OrderWishlist']);
+});
+
+//------------------------- Comment ---------------------------------//
+Route::post('/comment/{id}', [CommentController::class, 'AddComment']);

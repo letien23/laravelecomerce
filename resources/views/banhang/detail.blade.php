@@ -40,7 +40,7 @@
                         <div class="space20">&nbsp;</div>
 
                         <div class="single-item-desc">
-                            <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+                            <p>{{ $product->description }}</p>
                         </div>
                         <div class="space20">&nbsp;</div>
 
@@ -79,17 +79,44 @@
                 <div class="space40">&nbsp;</div>
                 <div class="woocommerce-tabs">
                     <ul class="tabs">
-                        <li><a href="#tab-description">Description</a></li>
-                        <li><a href="#tab-reviews">Reviews (0)</a></li>
+                      <li><a href="#tab-description">Description</a></li>
+                      <li><a href="#tab-comment">Comments</a></li>
                     </ul>
-
+          
                     <div class="panel" id="tab-description">
-                        <p>{{ $product->description}}</p>
+                        {{ $product->description }}
                     </div>
-                    <div class="panel" id="tab-reviews">
-                        <p>No Reviews</p>
+                    <div class="panel" id="tab-comment">
+          
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="card-body">
+                              <form method="post" action="/comment/{{$product->id}}">
+                                @csrf
+                                <div class="form-group">
+                                  <textarea class="form-control" name="comment" required></textarea>
+                                </div>
+                                <button type="submit" class="beta-btn primary">Bình luận</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+          
+                      @if(isset($comments))
+                      @foreach($comments as $comment)
+                      <p class="border-bottom">
+                      <p><b class="pull-left">{{$comment->username}}</b></p><br />
+                      <p>{{$comment->comment}}</p>
+                      </p>
+                      @endforeach
+                      @else
+                      <p>Chưa có bình luận nào cả!</p>
+                      @endif
                     </div>
-                </div>
+          
+                  </div>
                 <div class="space50">&nbsp;</div>
                 <div class="beta-products-list">
                     <h4>Related Products</h4>
