@@ -95,7 +95,7 @@
                               <form method="post" action="/comment/{{$product->id}}">
                                 @csrf
                                 <div class="form-group">
-                                  <textarea class="form-control" name="comment" required></textarea>
+                                  <textarea style="width: 40vw" cols="5" class="form-control" name="comment" required></textarea>
                                 </div>
                                 <button type="submit" class="beta-btn primary">Bình luận</button>
                               </form>

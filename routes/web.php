@@ -23,11 +23,11 @@ use App\Http\Middleware\AdminLoginMiddldeware;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 //Trang chu
-Route::get('/index',[PageController::class,'index'])->name('index');
+Route::get('/',[PageController::class,'index'])->name('index');
 //Show sp theo loai
 Route::get('/type/{id}',[PageController::class,'productsByType'])->name('productsByType');
 //Show trang chi tiet san pham
@@ -96,10 +96,10 @@ Route::post('/admin-edit',[CategoryController::class,'postAdminEdit'])->name('ed
 Route::post('/admin-delete/{id}',[CategoryController::class,'postAdminDelete'])->name('post-delete-product');
 //wishlist
 Route::prefix('wishlist')->group(function () {
-    Route::get('/add/{id}', [WishlistController::class, 'AddWishlist']);
-    Route::get('/delete/{id}', [WishlistController::class, 'DeleteWishlist']);
+    Route::get('/add/{id}', [WishlistController::class, 'AddWishlist'])->name('addwishlist');
+    Route::get('/delete/{id}', [WishlistController::class, 'DeleteWishlist'])->name('delwishlist');
 
-    Route::get('/order', [WishlistController::class, 'OrderWishlist']);
+    Route::get('/order', [WishlistController::class, 'OrderWishlist'])->name('checkoutwishlist');
 });
 
 //------------------------- Comment ---------------------------------//

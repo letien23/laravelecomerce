@@ -10,6 +10,8 @@ use App\Models\Customer;
 use App\Models\Bill;
 use App\Models\User;
 use App\Models\BillDetail;
+use App\Models\Comment;
+use App\Models\Wishlist;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,9 +38,10 @@ class PageController extends Controller
     }
 
     //Show ra trang chi tiết sản phẩm
-    public function getDetail($id){
+    public function getDetail($id, Request $request){
         $product = Product::find($id);
-        return view('banhang.detail',compact('product'));
+        $comments = Comment::where('id_product', $request->id)->get();
+        return view('banhang.detail',compact('product','comments'));
     }
 
     //Thêm vào giỏ hàng
@@ -158,6 +161,8 @@ class PageController extends Controller
         );
         $credentials=['email'=>$req->email,'password'=>$req->password];
         if(Auth::attempt($credentials)){//The attempt method will return true if authentication was successful. Otherwise, false will be returned.
+            $user = Auth::user();
+            Session::put('user', $user);
             return redirect('/index')->with(['flag'=>'alert','message'=>'Đăng nhập thành công']);
         }
         else{
@@ -170,6 +175,8 @@ class PageController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Session::forget('user');
+        Session::forget('cart');
         return redirect()->route('index');
     }
     //hàm xử lý nút Xác nhận thanh toán trên trang vnpay-index.blade.php, hàm này nhận request từ trang vnpay-index.blade.php
@@ -313,5 +320,11 @@ class PageController extends Controller
               return redirect()->route('getInputEmail')->with('message','Your email is not right');
         }
     }
+    //admin
+    public function getIndexAdmin()
+    {
+        return view('adminBanhang.indexAdmin');
+    }
+
 
 }

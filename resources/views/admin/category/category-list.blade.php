@@ -4,7 +4,7 @@
     <div class="space50">&nbsp;</div>
     <div class="container beta-relative">
         <div class="pull-left">
-            <h2 class="center">DANH SÁCH SẢN PHẨM</h2>
+            <h2 class="center">PRODUCTS LIST</h2>
         </div>
      
         <table id="table_admin_product" class="table table-striped display">
@@ -54,8 +54,7 @@
                 
                   <td colspan="10">
                     <nav aria-label="Page navigation">
-                      {{ $products->links() }}
-
+                      {{ $products->links('pagination::bootstrap-4') }}
                   </nav>
                   </td>
                     

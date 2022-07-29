@@ -64,7 +64,9 @@
 										</div>
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="{{ route('banhang.addtocart',$new->id) }}"><i class="fa fa-shopping-cart"></i></a>
+											
 											<a class="beta-btn primary" href="{{ route('detail', $new->id) }}">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-wishlist" href="{{ route('addwishlist',$new->id)}}"><i class="fa fa-heart"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -109,6 +111,7 @@
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="{{ route('banhang.addtocart',$pro->id) }}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{ route('detail', $pro->id) }}">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-wishlist" href="{{ route('addwishlist',$pro->id)}}"><i class="fa fa-heart"></i></a>
 											<div class="clearfix"></div>
 										</div>
                                         <hr>
